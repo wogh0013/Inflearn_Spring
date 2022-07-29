@@ -1,13 +1,15 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
-    private static long sequence = 0L; //키값을 생성해주는 역할할
+    private static long sequence = 0L; //키값을 생성해주는 역할
 
    @Override
     public Member save(Member member) {

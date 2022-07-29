@@ -1,7 +1,6 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ class MemoryMemberRepositoryTest {
     @AfterEach //메서드(테스트)가 끝날 때마다 동작
     public void afterEach(){
         repository.clearStore();
-        //테스트가 순서관계없이 시행되므로, 하나의 테스트가 끝날 때마다다리포지토리를 클리어시켜줌
+        //테스트가 순서관계없이 시행되므로, 하나의 테스트가 끝날 때마다 리포지토리를 클리어시켜줌
     }
 
     @Test
@@ -27,7 +26,7 @@ class MemoryMemberRepositoryTest {
         repository.save(member);
 
         Member result = repository.findById(member.getId()).get();
-         assertThat(member).isEqualTo(result);
+        assertThat(member).isEqualTo(result);
     }
 
     @Test
