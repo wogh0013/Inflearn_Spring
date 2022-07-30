@@ -15,23 +15,18 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
+    private final MemberRepository memberRepository;
 
-    @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    //인젝션받음.
+    // -> 스프링 데이터 JPA가 만들어놓은 구현체가 등록이 된다.
+    @Autowired //생략 가능
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository());
-    }
-
-    @Bean
-    public MemberRepository memberRepository(){
-        //return new MemoryMemberRepository(); //구현체를 반환
-        //return new JdbcMemberRepository(datasource);
-        //return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
+        //MemberService에 의존관계 세팅
+        return new MemberService(memberRepository);
     }
 }
